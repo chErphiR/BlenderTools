@@ -726,24 +726,8 @@ class UnrealImportAsset(Unreal):
             self._options.skeleton = self.get_asset(skeleton_path)
 
     def set_physics_asset(self):
-        """
-        Sets a physics asset to the import options.
-        """
-        asset_path = self._asset_data.get('asset_path')
-        physics_asset_path = self._property_data.get('unreal_physics_asset_path', {}).get('value', '')
-        default_physics_asset = f'{asset_path}_PhysicsAsset'
-        # try to load the provided physics asset
-        if physics_asset_path:
-            physics_asset = unreal.load_asset(physics_asset_path)
-        else:
-            physics_asset = unreal.load_asset(default_physics_asset)
-
-        if physics_asset:
-            self._options.create_physics_asset = False
-            self._options.physics_asset = physics_asset
-        else:
-            self._options.create_physics_asset = True
-
+        self._options.create_physics_asset = False
+        
     def set_static_mesh_import_options(self):
         """
         Sets the static mesh import options.
